@@ -1,18 +1,22 @@
-import express from 'express'
-import { applyForJob, getUserData, getUserJobApplications, updateUserResume } from '../controllers/userController.js'
+import express from "express";
+import {
+  applyForJob,
+  getUserData,
+  getUserJobApplications,
+} from "../controllers/userController.js";
 
-const router = express.Router()
+const router = express.Router();
 
 //Get user Data
-router.get('/user', getUserData)
+router.get("/user", getUserData);
 
 //Apply for a job
-router.post('/apply', applyForJob)
+router.post("/apply", applyForJob);
 
 //Get applied jobs data
-router.get('/applications', getUserJobApplications)
+router.get("/applications", getUserJobApplications);
 
 //Update user profile(resume)
-router.post('/update-resume', updateUserResume)
+/*router.post("/update-resume", updateUserResume);*/
 
-export default router
+export default router;

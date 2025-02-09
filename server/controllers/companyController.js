@@ -57,7 +57,7 @@ export const loginCompany = async (req, res) => {
   const { email, password } = req.body;
   try {
     const company = await Company.findOne({ email });
-    if (bcrypt.compare(password, company.password)) {
+    if (await bcrypt.compare(password, company.password)) {
       res.json({
         success: true,
         company: {
@@ -77,14 +77,14 @@ export const loginCompany = async (req, res) => {
 
 //Get company data
 export const getCompanyData = async (req, res) => {
-  
   try {
-    const company = req.company
-    res.json({success:true, company})
+    const company = req.company;
+    res.json({ success: true, company });
   } catch (error) {
     res.json({
-      success:false,message:error.message
-    })
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -116,12 +116,12 @@ export const getCompanyJobApplicants = async (req, res) => {};
 //Get Company Posted Jobs
 export const getCompanyPostedJobs = async (req, res) => {
   try {
-    const companyId = req.company._id
-    const jobs = await Job.find({companyId})
+    const companyId = req.company._id;
+    const jobs = await Job.find({ companyId });
     //(ToDo) Adding No. of applicants info in data
-    res.json({success:true, jobsData: jobs})
+    res.json({ success: true, jobsData: jobs });
   } catch (error) {
-      res.json({ success: false, message: error.message });
+    res.json({ success: false, message: error.message });
   }
 };
 
@@ -131,15 +131,15 @@ export const ChangeJobApplicationsStatus = async (req, res) => {};
 //Change job visibility
 export const changeVisibility = async (req, res) => {
   try {
-    const {id} = req.body
-    const companyId = req.company._id
-    const job = await Job.findById(id)
-    if(companyId.toString() === job.companyId.toString()) {
-      job.visible = !job.visible
+    const { id } = req.body;
+    const companyId = req.company._id;
+    const job = await Job.findById(id);
+    if (companyId.toString() === job.companyId.toString()) {
+      job.visible = !job.visible;
     }
-    await job.save()
-    res.json({success:true, job})
+    await job.save();
+    res.json({ success: true, job });
   } catch (error) {
-      res.json({success:false, message:error.message})
+    res.json({ success: false, message: error.message });
   }
 };

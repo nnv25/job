@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { assets, manageJobsData } from '../assets/assets';
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const ManageJobs = () => {
 
   const navigate = useNavigate()
+  const [jobs, setJobs] = useState(false)
 
   return (
     <div className='container p-4 max-w-5xl'>
